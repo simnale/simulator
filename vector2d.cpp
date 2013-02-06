@@ -14,15 +14,15 @@ Vector2d::~Vector2d()
 
 }
 
-void Vector2d::print(std::ofstream& out_stream)
+void Vector2d::print()
 {
-		out_stream << x << " " << y << std::endl;
+		std::cout << x << " " << y << std::endl;
 }
 
 void Vector2d::addVec(Vector2d vec)
 {
-		this->x = this.x + vec.x;
-		this->y = this.y + vec.y;
+		this->x = this->x + vec.x;
+		this->y = this->y + vec.y;
 }
 
 void Vector2d::multiply(float mag)

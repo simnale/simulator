@@ -1,4 +1,6 @@
 #include "window.h"
+#include "object.h"
+
 
 Window::Window()
 {
@@ -34,7 +36,8 @@ void Window::resize(GLsizei w, GLsizei h)
 
 void Window::run()
 {
-		sf::Window window(sf::VideoMode(800, 600), "Renderer", sf::Style::Default, sf::ContextSettings(32, 0, 0, 3, 2));
+		sf::Window window(sf::VideoMode(800, 600), "Renderer", sf::Style::Default,
+						  sf::ContextSettings(32, 0, 0, 3, 2));
 		window.setVerticalSyncEnabled(true);
 		sf::ContextSettings settings = window.getSettings();
 
@@ -65,7 +68,9 @@ void Window::run()
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 				// draw
-			
+				Object test;
+				test.setup_scene();
+						
 				// swap buffers
 				window.display();
 		}

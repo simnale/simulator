@@ -1,7 +1,7 @@
 #ifndef VECTOR2D_H
 #define VECTOR2D_H
 
-class std::ofstream;
+#include <fstream>
 
 class Vector2d
 {
@@ -11,7 +11,7 @@ public:
 		Vector2d(float a = 0, float b = 0);
 		~Vector2d();
 
-		void print(std::ofstream& out_stream);
+		void print();
 		void addVec(Vector2d vec);
 		void multiply(float mag);
 		float length();
