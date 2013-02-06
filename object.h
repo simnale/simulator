@@ -16,8 +16,8 @@ public:
 		Object();
 		~Object();
 		void setup_scene();
-        void render_scene(std::vector<Object> stack);
-        void draw_objects(std::vector<Object> stack);
+		void render_scene(std::vector<Object> stack);
+		void draw_objects(std::vector<Object> stack);
 };
 
 #endif

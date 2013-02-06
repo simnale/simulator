@@ -1,0 +1,12 @@
+#include "object.h"
+
+Object::Object()
+{
+		position.x = 0;
+		position.y = 0;
+		velocity.x = 0;
+		velocity.y = 0;
+		acceleration.x = 0;
+		acceleration.y = 0;
+		
+}
