@@ -1,3 +1,4 @@
+#include <iostream>
 #include "window.h"
 #include "object.h"
 
@@ -34,6 +35,15 @@ void Window::resize(GLsizei w, GLsizei h)
 		glLoadIdentity();
 }
 
+void test()
+{
+		std::cout << "test" << std::endl;
+		glClear(GL_COLOR_BUFFER_BIT);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glRectf(10.0f, 10.f, 10.0f, 10.f);
+		glFlush();
+}
+
 void Window::run()
 {
 		sf::Window window(sf::VideoMode(800, 600), "Renderer", sf::Style::Default,
@@ -66,11 +76,12 @@ void Window::run()
 				// clear buffers
 				glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		   
 				// draw
 				Object test;
 				test.setup_scene();
-						
+				test.render_scene();
+			   						
 				// swap buffers
 				window.display();
 		}
