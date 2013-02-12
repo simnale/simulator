@@ -36,12 +36,12 @@ float Vector2d::length()
 		return sqrt(pow(this->x, 2) + pow(this->y, 2));
 }
 
-Vector2d Vector2d::makeUnitVec(Vector2d vec)
+Vector2d Vector2d::makeUnitVec()
 {
 		Vector2d result;
-		float length = vec.length();
-		result.x = vec.x / length;
-		result.y = vec.y / length;
+		float length = this->length();
+		result.x = this->x / length;
+		result.y = this->y / length;
 		return result;
 }
 

@@ -1,0 +1,4 @@
+renderer
+*.o
+*.so
+.DS_Store

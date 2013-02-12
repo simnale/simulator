@@ -15,7 +15,7 @@ public:
 		void addVec(Vector2d vec);
 		void multiply(float mag);
 		float length();
-		Vector2d makeUnitVec(Vector2d vec);
+		Vector2d makeUnitVec();
 		Vector2d combineVecs(Vector2d a, Vector2d b);
 };
 

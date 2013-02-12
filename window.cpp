@@ -1,12 +1,16 @@
 #include <iostream>
+#include <cmath>
+#include "model.h"
 #include "window.h"
 #include "vector2d.h"
-#include <cmath>
+
 
 float stepx = 2.0f;
 float stepy = 2.0f;
 float x;
 float y;
+
+GLfloat nRange = 100.0f;
 
 Window::Window()
 {
@@ -18,7 +22,6 @@ Window::~Window()
 
 void Window::resize(GLsizei w, GLsizei h)
 {
-		GLfloat nRange = 100.0f;
 		GLfloat aspectRatio;
 		if (h == 0) h = 1;
 		glViewport(0, 0, w, h);
@@ -60,6 +63,12 @@ void point(float k)
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(x, y, 50.0f);
 		glEnd();
+}
+
+void final()
+{
+		Model test;
+		test.render();
 }
 
 void Window::run()
@@ -104,6 +113,8 @@ void Window::run()
 						k = 0;
 
 				k = k + 0.01;
+
+				final();
 			   						
 				// swap buffers
 				window.display();
