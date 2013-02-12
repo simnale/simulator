@@ -1,7 +1,12 @@
 #include <iostream>
 #include "window.h"
-#include "object.h"
+#include "vector2d.h"
+#include <cmath>
 
+float stepx = 2.0f;
+float stepy = 2.0f;
+float x;
+float y;
 
 Window::Window()
 {
@@ -13,6 +18,7 @@ Window::~Window()
 
 void Window::resize(GLsizei w, GLsizei h)
 {
+		GLfloat nRange = 100.0f;
 		GLfloat aspectRatio;
 		if (h == 0) h = 1;
 		glViewport(0, 0, w, h);
@@ -24,24 +30,36 @@ void Window::resize(GLsizei w, GLsizei h)
 		
 		if (w <= h)
 		{
-				glOrtho(-100.0, 100.0, -100 / aspectRatio, 100.0 / aspectRatio, 1.0, -1.0);
+				glOrtho(-nRange, nRange, -nRange/aspectRatio, nRange/aspectRatio, -nRange, nRange);
 		}
 		else
 		{
-				glOrtho(-100.0 * aspectRatio, 100.0 * aspectRatio, -100.0, 100.0, 1.0f, -1.0);
+				glOrtho(-nRange*aspectRatio, nRange*aspectRatio, -nRange, nRange, -nRange, nRange);
 		}
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 }
 
-void test()
+void test(Vector2d a, Vector2d b)
 {
-		std::cout << "test" << std::endl;
 		glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(1.0f, 1.0f, 1.0f);
-		glRectf(10.0f, 10.f, 10.0f, 10.f);
-		glFlush();
+		glColor3f(1.0f, 0.5f, 1.0f);
+		
+		glRectf(a.x, a.y, b.x, b.y);
+		//glRectf(-10.0f, 10.f, 10.0f, -10.f);
+		//glFlush();
+}
+
+void point(float k)
+{
+		x = 50.0f * sin(k);
+		y = 50.0f * cos(k);
+
+		glBegin(GL_POINTS);
+		glVertex3f(0.0f, 0.0f, 0.0f);
+		glVertex3f(x, y, 50.0f);
+		glEnd();
 }
 
 void Window::run()
@@ -57,6 +75,9 @@ void Window::run()
 
 		// main loop
 		bool running = true;
+		Vector2d one(-10.0, 10.0);
+		Vector2d two(10.0, -10.0);
+		float k = 0.0;
 
 		while (running)
 		{
@@ -76,11 +97,13 @@ void Window::run()
 				// clear buffers
 				glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		   
-				// draw
-				Object test;
-				test.setup_scene();
-				test.render_scene();
+				
+				point(k);
+
+				if (k > 3.14 * 2)
+						k = 0;
+
+				k = k + 0.01;
 			   						
 				// swap buffers
 				window.display();

@@ -1,4 +1,7 @@
-#include <GL/glew.h>
+#ifndef WINDOW_H
+#define WINDOW_H
+
+//#include <GL/glew.h>
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
 
@@ -12,3 +15,5 @@ public:
 		void resize(GLsizei w, GLsizei h);
 		
 };
+
+#endif
