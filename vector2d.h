@@ -13,6 +13,7 @@ public:
 
 		void print();
 		void addVec(Vector2d vec);
+		void substractVec(Vector2d vec);
 		void multiply(float mag);
 		float length();
 		Vector2d makeUnitVec();

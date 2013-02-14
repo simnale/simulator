@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <cstdlib>
 #include "model.h"
 #include "window.h"
 #include "vector2d.h"
@@ -9,6 +10,7 @@ float stepx = 2.0f;
 float stepy = 2.0f;
 float x;
 float y;
+Model test;
 
 GLfloat nRange = 100.0f;
 
@@ -44,15 +46,6 @@ void Window::resize(GLsizei w, GLsizei h)
 		glLoadIdentity();
 }
 
-void test(Vector2d a, Vector2d b)
-{
-		glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(1.0f, 0.5f, 1.0f);
-		
-		glRectf(a.x, a.y, b.x, b.y);
-		//glRectf(-10.0f, 10.f, 10.0f, -10.f);
-		//glFlush();
-}
 
 void point(float k)
 {
@@ -65,10 +58,50 @@ void point(float k)
 		glEnd();
 }
 
+void final_setup()
+{
+		Body earth;
+		Body moon;
+		Body a, b, c;
+		earth.mass = 5.97e24; // kg
+		moon.mass = 7.35e22; // kg
+		moon.position.x = 3.8e8; // m
+		a.position.x = -3.8e8;
+		moon.velocity.y = 1.023e3; // m/s
+		a.velocity.y = -0.8e3;
+		a.mass = moon.mass;
+		b.position.y = 3e8;
+		b.velocity.x = 0.5e3;
+		b.mass = moon.mass/2.0;
+		c.position.y = -2.7e8;
+		c.velocity.x = 0.5e3;
+		c.mass = moon.mass * 0.8;
+		
+	   
+		
+		test.world.push_back(earth);
+		test.world.push_back(moon);
+		test.world.push_back(a);
+		test.world.push_back(b);
+		//test.world.push_back(c);
+}
+
 void final()
 {
-		Model test;
+		test.updatePos();
 		test.render();
+}
+
+void randomPos()
+{
+		Body *collection = new Body[150];
+		for (int i = 0; i < 150; i++)
+		{
+				collection[i].position.x = rand() % 200 - 99;
+				collection[i].position.y = rand() % 200 - 99;
+				collection[i].mass = 0.05;
+				test.world.push_back(collection[i]);
+		}
 }
 
 void Window::run()
@@ -79,7 +112,7 @@ void Window::run()
 		sf::ContextSettings settings = window.getSettings();
 
 		// init states, load resources
-		resize(800, 600);
+		resize(800, 800);
 
 
 		// main loop
@@ -88,6 +121,10 @@ void Window::run()
 		Vector2d two(10.0, -10.0);
 		float k = 0.0;
 
+		//final_setup();
+		randomPos();
+
+		
 		while (running)
 		{
 				sf::Event event;
@@ -107,15 +144,11 @@ void Window::run()
 				glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				
-				point(k);
-
-				if (k > 3.14 * 2)
-						k = 0;
-
-				k = k + 0.01;
-
-				final();
-			   						
+			
+				//final();
+				test.updatePos();
+				test.render();
+					
 				// swap buffers
 				window.display();
 		}
